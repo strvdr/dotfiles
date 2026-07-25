@@ -53,6 +53,21 @@ existing file into the repo, so check `git diff` afterwards to see what it absor
 
 To remove a package: `stow -D <pkg>`.
 
+### Enable the secret-scanning hook
+
+`core.hooksPath` is local git config and is **not** carried by a clone, so set it
+once per machine:
+
+```bash
+  git config core.hooksPath hooks
+```
+
+`hooks/pre-commit` blocks commits containing private keys, provider-prefixed API
+tokens, and credential-shaped assignments. This matters here because the tracked
+files are symlinks to live configs — an application can write a secret into one
+and `git add -A` would stage it without you choosing to. Bypass a false positive
+with `git commit --no-verify`.
+
 
 ## What is deliberately NOT tracked
 
