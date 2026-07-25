@@ -1,0 +1,23 @@
+# Editor / OS noise
+*.swp
+*~
+.DS_Store
+
+# Fish mutable state (fish rewrites this itself)
+fish/.config/fish/fish_variables
+
+# HyDE-generated — never track these; HyDE regenerates them on every
+# theme/wallpaper change and tracking them causes conflicts on each switch.
+*/.config/hyde/
+dunst/.config/dunst/dunstrc
+fish/.config/fish/hyde_config.fish
+fish/.config/fish/conf.d/fish_frozen_*.fish
+kitty/.config/kitty/hyde.conf
+hypr/.config/hypr/themes/
+hypr/.config/hypr/animations/
+hypr/.config/hypr/hyprlock/
+
+# Neovim runtime state (plugins are pinned by lazy-lock.json, which IS tracked)
+nvim/.config/nvim/lazy/
+nvim/.config/nvim/.netrwhist
+nvim/.config/nvim/spell/
