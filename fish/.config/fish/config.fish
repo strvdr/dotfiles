@@ -4,6 +4,25 @@ source ~/.config/fish/hyde_config.fish
 
 if status is-interactive
     starship init fish | source
+
+    # fzf key bindings: Ctrl+T insert file path, Ctrl+R fuzzy history,
+    # Alt+C cd into a subdirectory.
+    fzf --fish | source
+
+    # zoxide: `z <partial>` jumps to a frecently-used dir, `zi` picks
+    # interactively via fzf. Guarded so this file still works on a machine
+    # where zoxide isn't installed yet.
+    if command -q zoxide
+        zoxide init fish | source
+    end
+end
+
+# Back fzf with fd so it respects .gitignore and skips .git — much faster than
+# the default `find` walk in large repos. Guarded like the above.
+if command -q fd
+    set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+    set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+    set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --follow --exclude .git'
 end
 
 # List Directory
