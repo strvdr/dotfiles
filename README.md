@@ -80,10 +80,14 @@ being tracked. After a HyDE update, check that nothing has detached:
 
 ```bash
   ls -l ~/.config/hypr/*.conf ~/.config/fish/config.fish \
-        ~/.config/kitty/*.conf ~/.config/dunst/dunst.conf | grep -v ' -> '
+        ~/.config/kitty/*.conf ~/.config/dunst/dunst.conf \
+    | grep -v ' -> ' \
+    | grep -vE 'animations\.conf|hyprlock\.conf|kitty/hyde\.conf'
 ```
 
-Anything listed is a real file where a symlink is expected — re-stow that package.
+No output means everything is still linked. Anything listed is a real file where a
+symlink is expected — re-stow that package. (The three names filtered out are the
+untracked HyDE defaults noted above; they are supposed to be real files.)
 
 
 ## Screenshots
